@@ -184,8 +184,21 @@ close2(Thing):-
    write(['el objeto',Thing,' no se encuentra']),nl,fail.
 
 watch(Thing):-
+  watch1(Thing),
+  here(Room),
+  retractall(location(makech,Thing)),
+  assert(location(makech,Room)),
+  look.
+watch(Thing):-
+  write(['no se puede ver dentro',Thing]),nl,fail.
+
+
+
+
+watch1(Thing):-
   here(Room),
   location(Thing,Room),
   accion(abierto),nl.
-watch(Thing):-
+watch1(Thing):-
   write(['no se puede ver dentro',Thing,'del objeto']),nl,fail.
+
