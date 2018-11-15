@@ -33,6 +33,11 @@ edible(crackers).
 
 tastes_yucky(broccoli).
 
+
+disponibles(desk).
+disponibles(whashingmachine).
+
+
 here(kitchen).
 acciond(cerrado).
 prender(flashlight).
@@ -126,6 +131,7 @@ eat2(Thing):-
 
 
 opendesk(Thing):-
+  disponibles(Thing),
   opendesk2(Thing),
   retractall(acciond(_)),
   assert(acciond(abierto)),nl.
@@ -193,6 +199,7 @@ turn_off2(Thing):-
 
 
 open(Thing):-
+  disponibles(Thing),
   open2(Thing),
   retractall(accion(_)),
   assert(accion(abierto)),nl.
