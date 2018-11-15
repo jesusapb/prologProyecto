@@ -27,7 +27,6 @@ location(makech,washingmachine).
 location(broccoli, kitchen).
 location(crackers, kitchen).
 location(computer, office).
-location(flashlight,office).
 
 edible(apple).
 edible(crackers).
@@ -125,8 +124,9 @@ eat2(Thing):-
 eat2(Thing):-
   write(['the ',Thing,'is not edible']),nl,fail.
 
+
 opendesk(Thing):-
-  open2(Thing),
+  opendesk2(Thing),
   retractall(acciond(_)),
   assert(acciond(abierto)),nl.
 opendesk(Thing):-
@@ -139,6 +139,21 @@ opendesk2(Thing):-
 opendesk2(Thing):-
    write(['el objeto',Thing,' no se encuentra']),nl,fail.
 
+watchdesk(Thing):-
+  watchdesk1(Thing),
+  here(Room),
+  retractall(location(flashlight,Thing)),
+  assert(location(flashlight,Room)),
+  look.
+watchdesk(Thing):-
+  write(['no se puede ver dentro',Thing]),nl,fail.
+
+watchdesk1(Thing):-
+  here(Room),
+  location(Thing,Room),
+  acciond(abierto),nl.
+watchdesk1(Thing):-
+  write(['no se puede ver dentro',Thing,'primero debes abrirlo']),nl,fai.
 
 
 
