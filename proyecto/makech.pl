@@ -1,6 +1,7 @@
 :-dynamic here/1.
 :-dynamic have/1.
 :-dynamic location/2.
+:-dynamic acciond/1.
 :-dynamic status/1.
 :-dynamic accion/1.
 
@@ -34,7 +35,7 @@ edible(crackers).
 tastes_yucky(broccoli).
 
 here(kitchen).
-
+acciond(cerrado).
 prender(flashlight).
 status(off).
 accion(cerrado).
@@ -123,6 +124,28 @@ eat2(Thing):-
   write(['you should not eat the',Thing]),nl.
 eat2(Thing):-
   write(['the ',Thing,'is not edible']),nl,fail.
+
+opendesk(Thing):-
+  open2(Thing),
+  retractall(acciond(_)),
+  assert(acciond(abierto)),nl.
+opendesk(Thing):-
+  write(['el objeto',Thing,' no puede ser abierto']),nl,fail.
+
+opendesk2(Thing):-
+   here(Room),
+   location(Thing,Room),
+   write(['la',Thing,' ya esta abierta']),nl.
+opendesk2(Thing):-
+   write(['el objeto',Thing,' no se encuentra']),nl,fail.
+
+
+
+
+
+
+
+
 
 turn_on(Thing):-
   turn_on2(Thing),
