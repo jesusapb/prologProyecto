@@ -183,4 +183,9 @@ close2(Thing):-
 close2(Thing):-
    write(['el objeto',Thing,' no se encuentra']),nl,fail.
 
-
+watch(Thing):-
+  here(Room),
+  location(Thing,Room),
+  accion(abierto),nl.
+watch(Thing):-
+  write(['no se puede ver dentro',Thing,'del objeto']),nl,fail.
