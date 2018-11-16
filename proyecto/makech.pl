@@ -33,12 +33,13 @@ edible(crackers).
 
 tastes_yucky(broccoli).
 
-
+%disponibles para ser abiertos
 disponibles(desk).
 disponibles(whashingmachine).
 
 
 here(kitchen).
+%lo que puede ser abierto/cerrado prendido/apagado
 acciond(cerrado).
 prender(flashlight).
 status(off).
@@ -130,12 +131,12 @@ eat2(Thing):-
   write(['the ',Thing,'is not edible']),nl,fail.
 
 
-opendesk(Thing):-
+openoffice(Thing):-
   disponibles(Thing),
   opendesk2(Thing),
   retractall(acciond(_)),
   assert(acciond(abierto)),nl.
-opendesk(Thing):-
+openoffice(Thing):-
   write(['el objeto',Thing,' no puede ser abierto']),nl,fail.
 
 opendesk2(Thing):-
@@ -145,27 +146,22 @@ opendesk2(Thing):-
 opendesk2(Thing):-
    write(['el objeto',Thing,' no se encuentra']),nl,fail.
 
-watchdesk(Thing):-
+watchoffice(Thing):-
   watchdesk1(Thing),
   here(Room),
   retractall(location(flashlight,Thing)),
   assert(location(flashlight,Room)),
   look.
-watchdesk(Thing):-
+watchoffice(Thing):-
   write(['no se puede ver dentro',Thing]),nl,fail.
 
 watchdesk1(Thing):-
   here(Room),
   location(Thing,Room),
-  acciond(abierto),nl.
+  acciond(abierto),
+  write('ya esta disponible la flashlight para poder tomarla'),nl.
 watchdesk1(Thing):-
-  write(['no se puede ver dentro',Thing,'primero debes abrirlo']),nl,fai.
-
-
-
-
-
-
+  write(['no se puede ver dentro',Thing,'primero debes abrirlo']),nl,fail.
 
 
 turn_on(Thing):-
@@ -196,8 +192,7 @@ turn_off2(Thing):-
 turn_off2(Thing):-
   write(['the',Thing,'es un objeto que esta apagado o no puede se apagado']),nl,fail.
 
-
-
+  %funciones para abrir la lavadora
 open(Thing):-
   disponibles(Thing),
   open2(Thing),
@@ -228,6 +223,7 @@ close2(Thing):-
 close2(Thing):-
    write(['el objeto',Thing,' no se encuentra']),nl,fail.
 
+   %funciones de ver dentro de la lavadora
 watch(Thing):-
   watch1(Thing),
   here(Room),
@@ -236,9 +232,6 @@ watch(Thing):-
   look.
 watch(Thing):-
   write(['no se puede ver dentro',Thing]),nl,fail.
-
-
-
 
 watch1(Thing):-
   here(Room),
