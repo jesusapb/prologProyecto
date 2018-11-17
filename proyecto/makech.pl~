@@ -35,7 +35,7 @@ tastes_yucky(broccoli).
 
 %disponibles para ser abiertos
 disponibles(desk).
-disponibles(washingmachine).
+disponibles(whashingmachine).
 
 
 here(kitchen).
